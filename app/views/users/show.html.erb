@@ -44,7 +44,7 @@
       <li class="notice-sentence">【勤怠編集のお知らせ】０件の通知があります</li>
     <% end %>
     <% if @requested_attendances.count>0 %>
-      <li><%=link_to "【残業申請のお知らせ】", attendances_edit_overtime_notice_user_path, remote:true,class:"notice-sentence"%>
+      <li><%=link_to "【残業申請のお知らせ】", attendances_edit_overtime_notice_user_path(date:@first_day), remote:true,class:"notice-sentence"%>
       <span class="notice-sentence"><%="#{@requested_attendances.count}件の通知があります" %></span></li>
     <% else %>
       <li class="notice-sentence">【残業申請のお知らせ】０件の通知があります</li>

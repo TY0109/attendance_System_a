@@ -9,7 +9,7 @@
 		<div class="modal-body">
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1">
-        <%= form_with(model:@user, url:attendances_update_overtime_notice_user_path(@user), method: :patch, local:true) do |f| %>
+        <%= form_with(model:@user, url:attendances_update_overtime_notice_user_path(@user, date:@first_day), method: :patch, local:true) do |f| %>
           <% @attendances.each do |day| %>
           <p class="request-title"><%= "【#{day.user.name}からの残業申請】" %></p>
           <table class="table table-bordered table-striped table-condensed" id="overtime-notice-table" %>
@@ -45,8 +45,8 @@
 			        <td><%=day.business_outline %></td>
 			        <td><%=d.select:instructor_reply, {'なし':1, '承認':2, '否認':3},{include_blank:"申請中"}, {class:"form-control"} %></td>
 			        <td><%=d.check_box :change, id:"change" %></td>
-			        <td><%=link_to "勤怠を確認する", user_path(day.user), class:"btn btn-primary"%></td>
-			      </tabody>
+			        <td><%=link_to "勤怠を確認する", user_path(day.user, date:@first_day), class:"btn btn-primary"%></td>
+			      </tbody>
 		        <% end %>
 	        </table>
 	        <% end %>

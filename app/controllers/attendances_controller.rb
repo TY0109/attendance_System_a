@@ -90,7 +90,7 @@ class AttendancesController < ApplicationController
   
   #残業の申請ページ#
   def edit_overtime_request
-    @first_day=params[:date].nil?? Date.current.beginning_of_month : params[:date].to_date
+    @first_day=params[:date]
     @user = User.find(params[:user_id])
     @attendance=@user.attendances.find(params[:id])
     @superior=User.where(superior:true).where.not(id:@user.id)
@@ -112,11 +112,9 @@ class AttendancesController < ApplicationController
     redirect_to user_url(@user, date:params[:date])
   end
     
-  
-  
   #残業の申請内容を見て承認するページ#
   def edit_overtime_notice
-    @first_day=params[:date].nil?? Date.current.beginning_of_month : params[:date].to_date
+    @first_day=params[:date]
     @attendances=Attendance.where(instructor_test:@user.name).where(change:false)
   end
   
@@ -129,7 +127,7 @@ class AttendancesController < ApplicationController
       end
     end
     flash[:success] = "変更内容を送信しました"
-    redirect_to user_url
+    redirect_to user_url(date:params[:date])
   rescue ActiveRecord::RecordInvalid 
     flash[:danger] = "無効な入力データがあった為、変更をキャンセルしました。"
     redirect_to attendances_edit_overtime_notice_user_url
