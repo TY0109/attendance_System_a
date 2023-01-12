@@ -17,6 +17,9 @@ gem 'bootstrap-will_paginate'
 gem 'roo'
 gem 'ransack'
 
+# fly.ioデプロイ時に追加
+gem 'mini_racer'
+
 group :development, :test do
   gem 'sqlite3'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
