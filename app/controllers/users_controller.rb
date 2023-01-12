@@ -77,6 +77,7 @@ class UsersController < ApplicationController
     if params[:csv_file].blank?
       flash[:danger]="読み込むCSVを選択してください"
     else
+      # インポートボタン押下でとんできたparams[:csv_file]の中から、データの件数を取得し、それをnumと置く。
       num = User.import(params[:csv_file])
       flash[:success]="#{ num.to_s }件のデータ情報を追加/更新しました"
     end

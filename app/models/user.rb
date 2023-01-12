@@ -52,25 +52,26 @@ class User < ApplicationRecord
   #   #文字コード変換のためにKernel#openとCSV#newを併用
   #   #参考： http://qiita.com/labocho/items/8559576b71642b79df67
     open(file.path,undef: :replace) do |f|
-      csv = CSV.new(f, :headers => :first_row) #エラーが出る
+      csv = CSV.new(f, :headers => :first_row) #エラーが出る。第1行目をヘッダーとして読み込み
       csv.each do |row|
-        next if row.header_row?
+        next if row.header_row?  #それぞれの行を読み込んでいくが、ヘッダーはすでに読み込んでいるのでとばす？
 
-  #       #CSVの行情報をHASHに変換
+  #     #CSVの行情報をHASH(ryby表示)に変換
         table = Hash[[row.headers, row.fields].transpose]
-
-  #       #登録済みデータ情報
-  #       #登録されてなければ作成
+        
+  #       #登録済みデータ情報を探す
         user = find_by(:email=> table['email'])
+        #登録されてなければ作成
         if user.nil?
           user= new
         end
-
-  #       #データ情報更新
+        
+  #       # user = find_by(:email=> table['email'])が存在しなければ、user=newの後、ここの処理へ。
+          # user = find_by(:email=> table['email'])が存在すれば、user=newなしでここの処理へ。
         user.attributes = table.to_hash.slice(
           *table.to_hash.except(:id, :created_at, :updated_at).keys)
-
-  #       #バリデーションokの場合は保存
+          
+  #       #バリデーションokの場合は保存(新規作成、更新どちらも)
         if user.valid?
           user.save!
           imported_num += 1
