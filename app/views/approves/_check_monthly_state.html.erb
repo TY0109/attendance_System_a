@@ -1,0 +1,48 @@
+<div class="modal-dialog modal-lg modal-dialog-center">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-
+			label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+        <div class="col-md-10 col-md-offset-1">
+	        <%= form_with(model: @user, url: approves_change_monthly_state_user_path, method: :patch, local: true) do |f| %>
+	          <% @monthly_states.each do |state| %>
+	          <p class="request-title"><%= "【#{state.user.name}からの勤怠申請】" %></p>
+	          <table class="table table-bordered table-condensed" id="comp_notice_table" %>
+	            <thead>
+	              <tr>
+	                <th>月</th>
+	                <th>指示者確認
+	                  <div class="maru size_small black">
+	        	          <div class="letter">印</div>
+	                  </div>
+	                </th>
+	                <th>変更</th>
+	                <th>勤怠を確認する</th>
+	              </tr>
+	            </thead>
+	            
+	            <%=f.fields_for "monthly_states[]", state do |d| %>
+	            <tbody>
+	    	         <tr>
+	    	           <td><%= l(state.worked_in, format: :shortB) %></td>
+	    	           <!-- <td><%= d.select:instructor_reply, {'なし':1, '承認':2, '否認':3}, {include_blank:"申請中"}, {class:"form-control"} %></td> -->
+									 <td><%= d.select(:instructor_reply, MonthlyState.instructor_replies.keys.map { |reply| [I18n.t("enums.monthly_state.instructor_reply.#{reply}"), reply] }, {include_blank:"申請中"}, {class:"form-control"}) %></td>
+	    	           <td><%= d.check_box :change, id: "change" %></td>
+			             <td><%= link_to "勤怠を確認する", user_path(state.user), class:"btn btn-primary"%></td>
+	    	         </tr>
+	            </tbody>
+	           <% end %>
+	          </table>
+	          <% end %>
+	          <%= f.submit "変更を送信する", class:"btn btn-primary" %>
+          <% end %>
+         </div>
+       </div>
+     </div>
+  </div>
+</div>

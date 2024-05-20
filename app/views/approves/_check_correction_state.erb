@@ -1,0 +1,79 @@
+<div class="modal-dialog modal-lg modal-dialog-center">
+	<div class="modal-content">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-
+			label="Close">
+				<span aria-hidden="true">×</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<div class="row">
+        <div class="col-md-10 col-md-offset-1">
+	        <%= form_with(model:@user, url: approves_change_correction_state_user_path(@user), method: :patch, local:true) do |f| %>
+	          <% @attendances.each do |day| %>
+	          <p class="request-title"><%= "【#{day.user.name}からの勤怠変更申請】" %></p>
+	          <table class="table table-bordered table-striped table-condensed" id="one_month_notice_table" %>
+	            <thead>
+	              <tr>
+	                <th rowspan="3">日付</th>
+	                <th rowspan="3">曜日</th>
+	                <th colspan="4">変更前</th>
+	                <th colspan="4">変更後</th>
+	                <th rowspan="3">備考</th>
+	                <th rowspan="3">指示者確認
+	                  <div class="maru size_small black">
+	        	          <div class="letter">印</div>
+	                  </div>
+	                </th>
+	                <th rowspan="3">変更</th>
+	                <th rowspan="3">勤怠を確認する</th>
+	              </tr>
+	              <tr>
+	                <th colspan="2">出社</th>
+	                <th colspan="2">退社</th>
+	      	        <th colspan="2">出社</th>
+	                <th colspan="2">退社</th>
+	              </tr>
+	              <tr>
+	                <th>時</th>
+	                <th>分</th>
+	                <th>時</th>
+	                <th>分</th>
+	                <th>時</th>
+	                <th>分</th>
+	                <th>時</th>
+	                <th>分</th>
+	              </tr>
+	            </thead>
+	    
+	            <%=f.fields_for "attendances[]", day do |d| %>
+	            <tbody>
+	    	         <tr>
+	    	           <td><%=l(day.worked_on, format: :short) %></td>
+	    	           <td><%=$days_of_the_week[day.worked_on.wday] %></td>
+	    	  				 <td><%=l(day.before_started_at, format: :hour) if day.before_started_at.present? %></td>
+	    	  				 <td><%=l(day.before_started_at, format: :minute) if day.before_started_at.present?%></td>
+	    	           <td><%=l(day.before_finished_at, format: :hour) if day.before_finished_at.present? %></td>
+	    	           <td><%=l(day.before_finished_at, format: :minute) if day.before_finished_at.present?   %></td>
+	    	           <td><%=l(day.started_at, format: :hour)  %></td>
+	    	  				 <td><%=l(day.started_at, format: :minute)  %></td>
+	    	           <td><%=l(day.finished_at, format: :hour) %></td>
+	    	           <td><%=l(day.finished_at, format: :minute) %></td>
+	    	           <td><%=day.note %></td>
+	    	            <!--以下dゾーン-->
+	    	           <!-- <td><%=d.select:instructor_one_month_reply,{'なし':1, '承認':2, '否認':3},{include_blank:"申請中"}, {class:"form-control"} %></td> -->
+									 <td><%=d.select(:instructor_one_month_reply, Attendance.instructor_one_month_replies.keys.map { |reply| [I18n.t("enums.attendance.instructor_one_month_reply.#{reply}"), reply] }, {include_blank:"申請中"}, {class:"form-control"}) %></td>
+	    	           <td><%=d.check_box :change_one_month, id:"change_one_month" %></td>
+			             <td><%=link_to "勤怠を確認する", user_path(day.user), class:"btn btn-primary"%></td>
+	    	         </tr>
+	            </tbody>
+	           <% end %>
+	          </table>
+	          <% end %>
+	          <%= f.submit "変更を送信する", class:"btn btn-primary" %>
+          <% end %>
+         </div>
+       </div>
+     </div>
+  </div>
+</div>

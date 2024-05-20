@@ -1,0 +1,26 @@
+<% provide(:title, "Place") %>
+
+<h1>拠点一覧</h1>
+<table class="table table-bordered table-striped" id="place-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th>拠点番号</th>
+      <th>拠点名</th>
+      <th>勤怠種類</th>
+  </thead>
+  <tbody>
+  <% @places.each do |place| %>
+    <tr>
+      <td><%=link_to "修正", edit_place_path(place), class:"btn btn-primary btn-edit-place" %></td>
+      <td><%=link_to "削除", place_path(place), method: :delete,  data: {confirm: "削除しますか？"}, class:"btn btn-primary" %></td>
+      <td><%=place.number %></td>
+      <td><%=place.name %></td>
+      <td><%=place.working_style %></td>
+  <% end %>
+  </tbody>
+</table>
+<div class="jumbotron jumbotron-new-place">
+  <%=link_to "拠点情報追加", new_place_path, class:"btn btn-primary btn-new-place" %>
+</div>

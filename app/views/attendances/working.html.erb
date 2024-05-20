@@ -1,0 +1,21 @@
+<% provide(:title, "Working") %>
+<h1>出勤社員一覧</h1>
+
+<table class="table table-bordered table-striped" id="working-table">
+  <thead>
+    <tr>
+      <th>社員番号</th>
+      <th>名前</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @attendances.each do |attendance| %>
+    <tr>
+      <td><%=attendance.user.employee_number%></td>
+      <td><%=attendance.user.name %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+

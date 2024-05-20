@@ -1,0 +1,76 @@
+#attendance-edit-table{
+  th{
+    text-align:center;
+  }
+  
+  td{
+    text-align:center;
+  }
+}
+
+
+.edit-btn-wrapper{
+  text-align:center;
+}
+
+.btn-cancel{
+  width:160px;
+}
+
+.btn-go{
+  width:160px;
+}
+
+
+/*残業申請の確認ページ*/
+#overtime-notice-table{
+  th{
+    text-align:center;
+  }
+  
+  td{
+    text-align:center
+  }
+}
+
+
+/*1か月の勤怠編集の確認ページ*/
+#one_month_notice_table{
+  th{
+    text-align:center;
+}
+
+  td{
+    text-align:center;
+  }
+}
+
+
+/*勤怠完全版の確認ページ*/
+#comp_notice_table{
+  th{
+    text-align:center;
+}
+
+  td{
+    text-align:center;
+  }
+}
+
+
+
+.request-title{
+  margin-bottom:-5px;
+}
+
+
+/*承認ログページ*/
+#log-table{
+  th{
+    text-align:center;
+}
+
+  td{
+    text-align:center;
+  }
+}

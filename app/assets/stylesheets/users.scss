@@ -1,0 +1,152 @@
+
+
+
+#user-info-table{
+  td{
+    text-align:center;
+    vertical-align:bottom;
+  }
+  
+  .designated{
+    white-space:pre;
+}
+
+  .time-table-title{
+    margin-left:30px;
+    margin-right:30px;
+  }
+  
+  .btn-change{
+    margin-bottom:20px;
+  }
+    
+}
+
+
+
+/*通知文*/
+.notice-sentences{
+  padding-left:0px;
+  list-style:none;
+}
+
+
+.notice-sentence{
+  color:red;
+  text-decoration:none;
+  
+  text-align:left;
+}
+
+
+
+
+/*勤怠表*/
+#user-attendance-table{
+  th{
+    text-align:center;
+  }
+  
+  td{
+    text-align:center;
+  }
+}
+
+
+
+
+/* 円の基本形 */
+.maru {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  flex-flow: column; 
+  
+}
+
+/* 円の大きさ（文字のwidthとheightより少し大きめに設定)*/
+.size_small{
+  width: 15px;
+  height: 15px;
+}
+
+/* 円の色 */
+.black {
+  border: 1px solid black;
+}
+
+
+/*文字の大きさ*/
+.letter{
+  font-size:10px;
+}
+
+
+
+
+/*モーダル*/
+
+.modal-daialog-center{
+  padding-top:10%;
+}
+
+.label-basic-info {
+  margin-top: 5px;
+}
+
+.btn-basic-info {
+  margin: 15px 0;
+  width: 30%;
+}
+
+
+#overtime-request-table{
+  th{
+    text-align:center;
+    white-space:nowrap;
+  }
+  
+  td{
+    text-align:center;
+    white-space:nowrap;
+  }
+}
+
+
+/*勤怠完全版の申請内容を確認し承認するページ*/
+#comp-notice-table{
+  th{
+    text-align:center;
+  }
+  
+  td{
+    text-align:center;
+  }
+
+}
+
+
+#working-table{
+  th{
+    text-align:center
+  }
+  
+  td{
+    text-align:center;
+  }
+}
+
+
+/*ユーザー一覧ページ*/
+.btn-csv{
+  padding-left:70px;
+  padding-right:70px;
+  margin-top:10px;
+  margin-bottom:20px;
+}
+
+
+.btn-edit-basic{
+  color:white !important;
+}

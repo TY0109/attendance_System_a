@@ -1,0 +1,38 @@
+<% provide(:title, "Log") %>
+
+<%= search_form_for @search, url: attendances_history_user_path(@user) do |f| %>
+  <%= f.label :reply_updated_at_gteq, "承認日で検索" %>
+  <%= f.date_field :reply_updated_at_gteq %>
+  <%= f.label :reply_updated_at_lteq, " ~ " %>
+  <%= f.date_field :reply_updated_at_lteq %>
+
+  <%= f.submit %>
+<% end %>
+
+<table class="table table-bordered table-striped" id="log-table">
+  <thead>
+    <tr>
+      <th>日付</th>
+      <th>変更前出社時間</th>
+      <th>変更前退社時間</th>
+      <th>変更後出社</th>
+      <th>変更後退社</th>
+      <th>指示者</th>
+      <th>承認日</th>
+    </tr>
+  </thead>
+
+  <% @attendances.each do |day| %>
+  <tbody>
+    <tr>
+      <td><%=l(day.worked_on, format: :short) %></td>
+      <td><%=l(day.before_started_at, format: :time) if day.before_started_at.present? %></td>
+      <td><%=l(day.before_finished_at, format: :time) if day.before_finished_at.present? %></td>
+      <td><%=l(day.started_at, format: :time) %></td>
+      <td><%=l(day.finished_at, format: :time) %></td>
+      <td><%=day.instructor_one_month_test %></td>
+      <td><%=l(day.reply_updated_at, format: :short) %></td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
